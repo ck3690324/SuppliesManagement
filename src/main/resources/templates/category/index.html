@@ -3,6 +3,7 @@
 <head>
 <title th:text="${title}"></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script src="/js/sort.js" charset="UTF-8" defer></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -27,12 +28,12 @@
 	</form>
 	
 	<hr>
-	<table class="table">
+	<table class="table" id="suppliesTable">
 		<thead>
 			<tr>
 				<!-- <th>ID</th> -->
-				<th>カテゴリ</th>
-				<th>備品数</th>
+				<th onclick="sortTable(0)">カテゴリ</th>
+				<th onclick="sortTable(1)">備品数</th>
 				<th>操作</th>
 			</tr>
 		</thead>
