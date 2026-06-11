@@ -23,6 +23,8 @@ public class SuppliesDAOImpl implements SuppliesDAO<Supplies> {
 
 	/**
 	 * 全備品取得
+	 * idはビューに非表示にするため
+	 * ソート順は資産番号の降順になります
 	 */
 	@Override
 	public List<Supplies> getAll() {
@@ -32,7 +34,9 @@ public class SuppliesDAOImpl implements SuppliesDAO<Supplies> {
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Supplies> query = builder.createQuery(Supplies.class);
 		Root<Supplies> root = query.from(Supplies.class);
-		query.select(root).orderBy(builder.desc(root.get("id")));
+		
+		// 取得 & ソート
+		query.select(root).orderBy(builder.desc(root.get("assets_number")));
 		list = entityManager.createQuery(query).getResultList();
 		return list;
 	}

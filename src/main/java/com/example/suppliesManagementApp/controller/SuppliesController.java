@@ -21,7 +21,7 @@ import com.example.suppliesManagementApp.repository.SuppliesRepository;
 import jakarta.transaction.Transactional;
 
 @Controller
-public class SupplierController {
+public class SuppliesController {
 	@Autowired
 	SuppliesRepository repository;
 	
@@ -81,7 +81,6 @@ public class SupplierController {
 		else {
 			mav.setViewName("index");
 			mav.addObject("title", "備品登録");
-			mav.addObject("msg", "登録失敗");
 			
 			// カテゴリ一覧取得(セレクトリスト用)
 			mav.addObject("categories", categoryRepository.findAll());
@@ -93,7 +92,6 @@ public class SupplierController {
 			// 遷移先をセット
 			res = mav;
 		}
-		
 		// 遷移先を返す
 		return res;
 	}
@@ -123,9 +121,10 @@ public class SupplierController {
 	
 	/**
 	 * 編集送信処理
-	 * @param Supplies 変更後の備品
+	 * @param Supplies変更後の備品
+	 * @param result 変更結果
 	 * @param mav ビュー
-	 * @return 一覧画面
+	 * @return 一覧画面・エラー画面
 	 */
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@Transactional

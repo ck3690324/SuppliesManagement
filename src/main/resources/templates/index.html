@@ -8,16 +8,15 @@
 	rel="stylesheet">
 </head>
 <body class="container">
-	<h1 class="display-4 mb-4" th:text="${title}"></h1>
+	<div class="d-flex justify-content-between align-items-center mb-4">
+		<h1 class="display-4 mb-0" th:text="${title}"></h1>
+		<a th:href="@{/category}" class="btn btn-info">カテゴリ管理</a>
+	</div>
 
 	<hr>
 
 	<form method="post" action="/" th:object="${formModel}">
-		<style>
-.err {
-	color: red
-}
-</style>
+		<style> .err { color: red }</style>
 		<div class="mb-3">
 			<label for="assets_number" class="form-label">資産番号</label>
 			<input type="text" class="form-control" name="assets_number" th:value="*{assets_number}" th:errorclass="err" />
@@ -28,11 +27,6 @@
 			<input type="text" class="form-control" name="supplies_name" th:value="*{supplies_name}" th:errorclass="err" />
 			<div th:if="${#fields.hasErrors('supplies_name')}" th:errors="*{supplies_name}" th:errorclass="err"></div>
 		</div>
-		<!-- <div class="mb-3">
-			<label for="supplies_category" class="form-label">カテゴリ</label>
-			<input type="text" class="form-control" name="supplies_category" th:value="*{supplies_category}" th:errorclass="err" />
-			<div th:if="${#fields.hasErrors('supplies_category')}" th:errors="*{supplies_category}" th:errorclass="err"></div>
-		</div> -->
 		<div class="mb-3">
 			<label for="category" class="form-label">カテゴリ</label>
 			<select class="form-select" th:field="*{category}">
@@ -66,7 +60,6 @@
 				<!-- <td th:text="${item.id}"></td> -->
 				<td th:text="${item.assets_number}"></td>
 				<td th:text="${item.supplies_name}"></td>
-				<!-- <td th:text="${item.supplies_category}"></td> -->
 				<td th:text="${item.category.category_name}"></td>
 				<td th:text="${item.holder}"></td>
 				<td>
