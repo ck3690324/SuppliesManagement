@@ -20,7 +20,7 @@
 			<div th:if="${#fields.hasErrors('category_name')}" th:errors="*{category_name}" th:errorclass="err"></div>
 		</div>
 		<input type="submit" class="btn btn-primary" value="更新" />
-		<a th:href="@{/}" class="btn btn-secondary">取消</a>
+		<a th:href="@{/category}" class="btn btn-secondary">取消</a>
 	</form>
 </body>
 </html>

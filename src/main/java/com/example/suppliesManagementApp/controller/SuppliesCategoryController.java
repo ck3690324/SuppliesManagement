@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.suppliesManagementApp.dao.SuppliesCategoryDAOImpl;
 import com.example.suppliesManagementApp.model.SuppliesCategory;
 import com.example.suppliesManagementApp.repository.SuppliesCategoryRepository;
 
@@ -22,6 +23,9 @@ import jakarta.transaction.Transactional;
 public class SuppliesCategoryController {
 	@Autowired
 	SuppliesCategoryRepository categoryRepository;
+	
+	@Autowired
+	SuppliesCategoryDAOImpl dao;
 
 	/**
 	 * 初期アクセス
@@ -34,7 +38,12 @@ public class SuppliesCategoryController {
 	public ModelAndView index(@ModelAttribute("categoryFormModel") SuppliesCategory category, ModelAndView mav) {
 		mav.setViewName("category/index");
 		mav.addObject("title", "備品カテゴリ管理");
-		mav.addObject("categories", categoryRepository.findAll());
+		
+		// カテゴリ取得
+		Iterable<SuppliesCategory> list = dao.getAll();
+		mav.addObject("data", list);
+		
+		// 遷移
 		return mav;
 	}
 	
@@ -63,7 +72,8 @@ public class SuppliesCategoryController {
 			mav.addObject("title", "備品カテゴリ管理");
 			
 			// カテゴリ取得
-			mav.addObject("categories", categoryRepository.findAll());
+			Iterable<SuppliesCategory> list = dao.getAll();
+			mav.addObject("data", list);
 			
 			// 遷移先をセット
 			res = mav;
@@ -115,12 +125,8 @@ public class SuppliesCategoryController {
 		// 弾かれた場合
 		else {
 			// 遷移先
-			mav.setViewName("/category/edit");
-			
+			mav.setViewName("/category/edit");			
 			mav.addObject("title", "備品カテゴリ編集");
-			
-			// カテゴリ取得
-			mav.addObject("categories", categoryRepository.findAll());
 			
 			// 遷移先をセット
 			res = mav;

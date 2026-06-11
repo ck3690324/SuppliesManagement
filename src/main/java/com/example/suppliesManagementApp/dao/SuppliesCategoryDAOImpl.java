@@ -25,7 +25,7 @@ public class SuppliesCategoryDAOImpl implements SuppliesCategoryDAO<SuppliesCate
 	 * 全カテゴリ取得
 	 */
 	@Override
-	public List<SuppliesCategory> getALL() {
+	public List<SuppliesCategory> getAll() {
 		// 一覧リストの初期化
 		List<SuppliesCategory> list = null;
 		
